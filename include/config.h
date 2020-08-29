@@ -30,4 +30,7 @@
 /* keyboard */
 #define CHIP8_TOTAL_KEYS 16
 
+/* character set */
+#define CHIP8_CHARACTER_SET_LOAD_ADDRESS 0X00
+
 #endif
