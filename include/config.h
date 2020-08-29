@@ -2,9 +2,9 @@
 #define CONFIG_H
 
 /* monitor */
-#define EMULATOR_WINDOW_TITLE "Chip8 Emulator v0.1"
-#define CHIP8_WIDTH 64
-#define CHIP8_HEIGHT 32
+#define EMULATOR_WINDOW_TITLE "Chip8 Emulator v1"
+#define CHIP8_SCREEN_WIDTH 64
+#define CHIP8_SCREEN_HEIGHT 32
 #define CHIP8_WINDOW_SCALE 10
 
 #define BACKGROUND_COLOR_R 0
