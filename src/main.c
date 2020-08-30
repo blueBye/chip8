@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "SDL2/SDL.h"
+#include <unistd.h>
 
+#include "SDL2/SDL.h"
+#include "beep.h"
 #include "chip8.h"
 #include "chip8keyboard.h"
+
 
 const char keyboard_map[CHIP8_TOTAL_KEYS] = {
     SDLK_0, SDLK_1, SDLK_2, SDLK_3, SDLK_4, SDLK_5,
@@ -17,6 +20,8 @@ int main(int argc, char **argv){
     // chip8_screen_set(&chip8.screen, 10, 1);
     chip8_screen_draw_sprite(&chip8.screen, 30, 15, &chip8.memory.memory[0x05], 5);
     chip8_screen_draw_sprite(&chip8.screen, 35, 15, &chip8.memory.memory[0x00], 5);
+    chip8.registers.deley_timer = 20;
+    chip8.registers.sound_timer = 1;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
@@ -27,14 +32,16 @@ int main(int argc, char **argv){
         CHIP8_SCREEN_HEIGHT * CHIP8_WINDOW_SCALE, SDL_WINDOW_SHOWN);
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_TEXTUREACCESS_TARGET);
-    while (1)
-    {
+    
+    bool condition = true;
+
+    while(condition){
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
             switch (event.type) {
             case SDL_QUIT:
-                goto out;
+                condition = false;
                 break;
 
             case SDL_KEYDOWN:
@@ -79,9 +86,23 @@ int main(int argc, char **argv){
         }
 
         SDL_RenderPresent(renderer);
+
+        /* delay timer */
+        while (chip8.registers.deley_timer > 0){
+            usleep(20000);  
+            chip8.registers.deley_timer -= 1;
+            printf("%d\n", chip8.registers.deley_timer);
+            SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+        }
+
+        /* sound timer */
+        if (chip8.registers.sound_timer > 0){
+            beep(4400, 20, 28000);
+            chip8.registers.sound_timer -= 1;
+        }
     }
 
-out:
+
     SDL_DestroyWindow(window);
     return 0;
 }

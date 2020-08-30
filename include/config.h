@@ -33,4 +33,9 @@
 /* character set */
 #define CHIP8_CHARACTER_SET_LOAD_ADDRESS 0X00
 
+// /* beep */
+// #define duration 20
+// #define Hz 700
+// #define amplitude 28000
+
 #endif
