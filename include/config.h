@@ -20,6 +20,7 @@
 
 /* memory */
 #define CHIP8_MEMORY_SIZE 4096
+#define CHIP8_PROGRAM_LOAD_ADDRESS 0X200
 
 /* registers */
 #define CHIP8_TOTAL_DATA_REGISTERS 16
@@ -33,9 +34,6 @@
 /* character set */
 #define CHIP8_CHARACTER_SET_LOAD_ADDRESS 0X00
 
-// /* beep */
-// #define duration 20
-// #define Hz 700
-// #define amplitude 28000
+#define CHIP8_DEFAULT_SPRITE_HEGHT 5
 
 #endif

@@ -1,5 +1,6 @@
 #include "chip8screen.h"
 #include <assert.h>
+#include <memory.h>
 
 
 static void chip8_screen_boundery_check(int x, int y){
@@ -9,6 +10,10 @@ static void chip8_screen_boundery_check(int x, int y){
 void chip8_screen_set(struct chip8_screen* screen, int x, int y){
     chip8_screen_boundery_check(x, y);
     screen->pixels[y][x] = true;
+}
+
+void chip8_screen_clear(struct chip8_screen* screen){
+    memset(screen->pixels, 0 , sizeof(screen->pixels));
 }
 
 bool chip8_screen_is_set(struct chip8_screen* screen, int x, int y){

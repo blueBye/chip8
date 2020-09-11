@@ -31,7 +31,7 @@ void beep(int frequency, int duration, int amplitude){
     want.freq = SAMPLE_RATE; // number of samples per second
     want.format = AUDIO_S16SYS; // sample type (here: signed short i.e. 16 bit)
     want.channels = 1; // only one channel
-    want.samples = 2048; // buffer-size
+    want.samples = 65534; // buffer-size
     want.callback = audio_callback; // function SDL calls periodically to refill the buffer
     want.userdata = &sample_nr; // counter, keeping track of current sample number
 
